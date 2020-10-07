@@ -14,9 +14,9 @@ import com.capstone.dao.EquipmentDao;
 import com.capstone.dao.HomeTrainingDao;
 import com.capstone.dao.MealDao;
 import com.capstone.model.Equipment;
-import com.capstone.model.HomeTraining;
+import com.capstone.model.Vedio;
 import com.capstone.model.Meal;
-import com.capstone.model.User;
+import com.capstone.model.Member;
 
 public class ContentsController {
 	
@@ -30,7 +30,7 @@ public class ContentsController {
 	private HomeTrainingDao hometrainingDao;
 	
 	@GetMapping("/admin/hometraining")
-	public List<HomeTraining> listHomeTraining(){
+	public List<Vedio> listHomeTraining(){
 		return hometrainingDao.findAllHomeTraining();
 	}
 	
@@ -45,7 +45,7 @@ public class ContentsController {
 	}
 
 	@PostMapping("/admin/hometraining/add")
-	public ResponseEntity<HomeTraining> addHomeTrainingData(@RequestBody HomeTraining ht) {
+	public ResponseEntity<Vedio> addHomeTrainingData(@RequestBody Vedio ht) {
 		hometrainingDao.saveHomeTraining(ht);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(ht.getTitle()).toUri();

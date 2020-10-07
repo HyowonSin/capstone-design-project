@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.capstone.dao.UserDao;
-import com.capstone.model.User;
+import com.capstone.model.Member;
 import com.sun.jndi.toolkit.url.Uri;
 
 @RestController
@@ -28,8 +28,8 @@ public class UserController {
 	
 	@GetMapping("admin/user/{id}")
 	@ResponseBody
-	public User findUserData(@RequestParam String id) {
-		User one = userDao.findByID(id);
+	public Member findUserData(@RequestParam String id) {
+		Member one = userDao.findByID(id);
 		if(one == null) {
 			throw new UserNotFoundException(String.format("ID[%s] not found", id));
 		}
@@ -38,7 +38,7 @@ public class UserController {
 	} 
 	
 	@GetMapping("admin/user")
-	public List<User> retrieveAllUser(){
+	public List<Member> retrieveAllUser(){
 		return userDao.findAllUser();
 	}
 

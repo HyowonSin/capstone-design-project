@@ -6,41 +6,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+
 
 @Entity
-@Table(schema = "Data")
-@AllArgsConstructor
-@Data
-public class Meal {
-	
-	
-	
-	
+@Table(schema = "Information")
+public class Challenge {
+
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column (updatable = false, nullable = false, columnDefinition = "INT(11)", unique = true)
 	private Long id;
 	
-	@Column (nullable = false, length = 50)
-	private String name;
-	
-	@Column (length = 10)
-	private String serving_size;
-	
-	@Column (length = 10)
-	private String calory;
-	
-	@Column (length = 10)
-	private String carbohydrate;
-	
-	@Column (length = 10)
-	private String protein;
-	
-	@Column (length = 10)
-	private String fat;
+	@Column (nullable = false)
+	private Long member_id;
 	
 	@Column (nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -49,4 +29,22 @@ public class Meal {
 		Muscleaugmentation,
 		Bodytypecorrection
 	}
+	
+	@Column (length = 100)
+	private String challenge_goal;
+	
+	@Column (length = 100)
+	private String training_to_do;
+	
+	@Column
+	private Date start_date;
+	
+	@Column
+	private Date end_date;
+	
+	@Enumerated(EnumType.STRING)
+	private enum certification_day{
+		Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	}
+	
 }

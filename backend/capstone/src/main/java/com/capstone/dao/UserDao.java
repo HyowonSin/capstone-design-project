@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.capstone.model.User;
+import com.capstone.model.Member;
 import com.capstone.repository.UsersRepository;
 
 @Component
@@ -14,11 +14,11 @@ public class UserDao {
 	@Autowired
 	private UsersRepository userRepo;
 	
-	public List<User> findAllUser(){
+	public List<Member> findAllUser(){
 		return null;
 	}
 	
-	public User findByID(String ID) {
+	public Member findByID(String ID) {
 		return null;
 	}
 

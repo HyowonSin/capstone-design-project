@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.capstone.model.HomeTraining;
+import com.capstone.model.Vedio;
 import com.capstone.repository.HomeTrainingRepository;
 
 @Component
@@ -14,7 +14,7 @@ public class HomeTrainingDao {
 	@Autowired
 	private HomeTrainingRepository homeTrainingRepo;
 	
-	public List<HomeTraining> findAllHomeTraining(){
+	public List<Vedio> findAllHomeTraining(){
 		return null;
 	}
 	
@@ -22,7 +22,7 @@ public class HomeTrainingDao {
 		return false;
 	}
 	
-	public boolean saveHomeTraining(HomeTraining ht) {
+	public boolean saveHomeTraining(Vedio ht) {
 		return false;
 	}
 }
