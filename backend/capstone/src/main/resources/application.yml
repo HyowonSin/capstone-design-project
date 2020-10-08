@@ -3,30 +3,16 @@ spring:
     active: local # 기본적으로 local이 선택된다는 뜻
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/capstone?serverTimezone=Asia/Seoul&useSSL=false
+    url: jdbc:mysql://3.34.144.33:3306/data?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
-    password: qwer1234
-    hikari:	# DB 커넥션 Pool
-      auto-commit: false
-      connection-test-query: SELECT 1
-      minimum-idle: 10
-      maximum-pool-size: 50
-      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
-      pool-name: pool-capstone
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: false
-    open-in-view: false
+    password: covid19
 
 ---
 
 spring:
   profiles: local
 server:
-  port: 8071
+  port: 8079
 
 ---
 
@@ -37,23 +23,8 @@ spring:
   profiles: production
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/sbs_exam_1?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: "jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC"
     username: root
-    password: qwer1234
-    hikari:
-      auto-commit: false
-      connection-test-query: SELECT 1
-      minimum-idle: 10
-      maximum-pool-size: 50
-      transaction-isolation: TRANSACTION_READ_UNCOMMITTED
-      pool-name: pool-capstone
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    properties:
-      hibernate:
-        format_sql: true
-    generate-ddl: false
-    open-in-view: false
-
+    password: 
 server:
   port: 8081

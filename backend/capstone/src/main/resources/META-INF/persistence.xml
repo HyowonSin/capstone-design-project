@@ -2,27 +2,36 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	
 	<persistence-unit name="capstone">
+
+		<!-- 엔티티 클래스 -->
 		<class>com.capstone.model.Equipment</class>
 		<class>com.capstone.model.Vedio</class>
 		<class>com.capstone.model.Meal</class>
 		<class>com.capstone.model.Member</class>
-	
-		<!-- 엔티티 클래스 -->
-	
+		<class>com.capstone.model.Challenge</class>
+		<class>com.capstone.model.Record</class>	
+
 		<properties>
-		<!-- 캐쉬 기능. 이게 true가 되어 있으면 이 프로젝틀르 통하지 않는 query는 반영이 늦을 수 있음 -->
-		<property name="eclipselink.query-results-cache" value="false" />
-		<property name="eclipselink.logging.level" value="INFO" />
-		<property name="eclipselink.logging.parameters" value="true" />
-		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+		<!-- 필수 속성 -->
+		<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
 		<!-- database -->
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mysql" />
 		<!-- 접속 id -->
 		<property name="javax.persistence.jdbc.user" value="root" />
 		<!-- 접속 password -->
 		<property name="javax.persistence.jdbc.password" value="qwer1234" />
+		<!-- 데이터베이스 방언 : mysql -->
+		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 		
+		<!-- 캐쉬 기능. 이게 true가 되어 있으면 이 프로젝틀르 통하지 않는 query는 반영이 늦을 수 있음 -->
+		<property name="eclipselink.query-results-cache" value="false" />
+		<property name="eclipselink.logging.level" value="INFO" />
+		<property name="eclipselink.logging.parameters" value="true" />
+
 		<!-- 옵션 -->
+		<property name="hibernate.show_sql" value="true" />
+		<property name="hibernate.format_sql" value="true" />
+		<property name="hibernate.use_sql_comments" value="true" />
 		
 		</properties>
 	</persistence-unit>

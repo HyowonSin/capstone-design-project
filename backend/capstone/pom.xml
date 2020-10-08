@@ -46,10 +46,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -69,12 +66,25 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- JPA Provider (Hibernate) --> 
-		<dependency> 
-			<groupId>org.hibernate</groupId> 
-			<artifactId>hibernate-entitymanager</artifactId> 
+		<!-- xml bind ? 라이브러리 -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+    		<artifactId>jaxb-api</artifactId>
+    		<version>2.3.1</version>
 		</dependency>
 		
+		<!-- JPA 하이버네이트 --> 
+		<dependency> 
+			<groupId>org.hibernate</groupId> 
+			<artifactId>hibernate-entitymanager</artifactId>
+			</dependency>
+		
+		<!-- MYSQL 데이터베이스 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
