@@ -2,40 +2,51 @@ package com.capstone.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "member", catalog = "information")
+@Table (name = "video", catalog = "data")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Member {
+public class Video {
+	
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column (updatable = false, nullable = false, columnDefinition = "INT(11)", unique = true)
 	private int id;
 	
-	@Column (nullable = false, length = 50, unique = true)
-	private String email;
-	
-	@Column (nullable = false, length = 30)
+	@Column(length = 50)
 	private String name;
+
+	@Column(length = 100)
+	private String title;
 	
-	@Column (nullable = false, length = 30)
-	private String password;
+	@Column(length = 30)
+	private String uploader;
 	
-	@OneToOne
-	@JoinColumn(name = "challenge")
-	private Challenge challenge;
+	@Column(length = 30)
+	private String url;
 	
+//	@Column (nullable = false)
+//	@Enumerated(EnumType.STRING)
+//	private Training_Purpose training_purpose;
+//	
+//	private enum Training_Purpose{
+//		Weightloss,
+//		Muscleaugmentation,
+//		Bodytypecorrection
+//	}
 }

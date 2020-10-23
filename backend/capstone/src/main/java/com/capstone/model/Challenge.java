@@ -1,19 +1,20 @@
 package com.capstone.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
-
-
 
 @Entity
-@Table(schema = "Information")
+@Table(name = "challenge", catalog = "information")
 public class Challenge {
-
+	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	@Column (updatable = false, nullable = false, columnDefinition = "INT(11)", unique = true)
@@ -22,29 +23,34 @@ public class Challenge {
 	@Column (nullable = false)
 	private Long member_id;
 	
+	
 	@Column (nullable = false)
 	@Enumerated(EnumType.STRING)
-	private enum training_purpose{
+	private Training_Purpose training_purpose;
+	
+	private enum Training_Purpose{
 		Weightloss,
 		Muscleaugmentation,
 		Bodytypecorrection
 	}
 	
-	@Column (length = 100)
+	@Column (nullable = false, length = 100)
 	private String challenge_goal;
 	
-	@Column (length = 100)
+	@Column (nullable = false, length = 100)
 	private String training_to_do;
 	
-	@Column
+	@Column (nullable = false)
 	private Date start_date;
 	
-	@Column
+	@Column (nullable = false)
 	private Date end_date;
 	
+	@Column (nullable = false)
 	@Enumerated(EnumType.STRING)
-	private enum certification_day{
+	private Certification_Day certification_day;
+	
+	private enum Certification_Day{
 		Mon, Tue, Wed, Thu, Fri, Sat, Sun
 	}
-	
 }
