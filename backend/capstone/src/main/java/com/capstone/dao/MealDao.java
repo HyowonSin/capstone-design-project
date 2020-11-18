@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.capstone.controller.ContentsNotFoundException;
 import com.capstone.model.Meal;
+import com.capstone.model.Video;
 import com.capstone.repository.MealRepository;
 
 @Component
@@ -44,9 +45,13 @@ public class MealDao {
 			target.setFat(meal.getFat());
 			target.setName(meal.getName());
 			target.setProtein(meal.getProtein());
-			target.setServing_size(meal.getServing_size());
-			target.setTraining_purpose(meal.getTraining_purpose());
+			target.setServing(meal.getServing());
+			target.setGoal(meal.getGoal());
 			mealRepo.save(target);
+	}
+	
+	public List<Meal> findAllMealByGoal(String goal) {
+		return mealRepo.findAllByGoal(goal);
 	}
 
 }

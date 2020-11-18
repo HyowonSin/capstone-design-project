@@ -2,12 +2,15 @@ package com.capstone.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +19,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@DynamicInsert
+@DynamicUpdate
 @Data
 @Table(name = "equipment", catalog = "data")
 public class Equipment {
@@ -34,22 +39,23 @@ public class Equipment {
 	@Column (nullable = false, length = 500)
 	private String url;
 	
-	@Column (length = 15, columnDefinition = "default 'free'") //배송비 없으면 free 출
-	private String shipping_charge;
+	@Column (columnDefinition = "varchar(15) default 'free'") //배송비 없으면 free 출력
+	@ColumnDefault("'free'")
+	private String shipping;
 	
 	@Column (length = 30)
 	private String seller;
 	
-	private String training_purpose;
+	private String goal;
 
 
 	public void update(Equipment equipment) {
 		name = equipment.getName();
 		price = equipment.getPrice();
 		url = equipment.getUrl();
-		shipping_charge = equipment.getShipping_charge();
+		shipping = equipment.getShipping();
 		seller = equipment.getSeller();
-		training_purpose = equipment.getTraining_purpose();
+		goal = equipment.getGoal();
 	}
 	
 	/*

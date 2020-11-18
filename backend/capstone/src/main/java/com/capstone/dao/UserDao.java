@@ -27,8 +27,7 @@ public class UserDao {
 	}
 	
 	public Member findByName(String name) {
-		Optional<Member> user = Optional.of(userRepo.findByName(name));
-		return user.get();
+		return userRepo.findByName(name);
 	}
 
 	public boolean deleteUser(int id) {
@@ -52,4 +51,32 @@ public class UserDao {
 	public void saveUser(Member user) {
 		userRepo.save(user);
 	}
+	/*
+	public Member findBodyByGoal (String goal) {
+		if(userRepo.findMemberByGoal(goal) == "Body") {
+			
+			VideoDao.findByBody();
+			MealDao.findByBody();
+			EquipmentDao.findByBody();
+		}
+	}
+	
+	public Member findDietByGoal (String goal) {
+		if(userRepo.findByTraining_purpose(goal) == "Diet") {
+			
+			videoDao.findByWeight();
+			mealDao.findByWeight();
+			equipmentDao.findByWeight();
+		}
+	}
+	
+	public Member findMuscleByGoal (String goal) {
+		if(userRepo.findByTraining_purpose(goal) == "Muscle") {
+			
+			videoDao.findByMuscle();
+			mealDao.findByMuscle();
+			equipmentDao.findByMuscle();
+		}
+	}
+	*/
 }

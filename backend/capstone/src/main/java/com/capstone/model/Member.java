@@ -1,27 +1,18 @@
 package com.capstone.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,70 +21,39 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Member implements UserDetails {
+public class Member {
 	
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column (insertable = true ,updatable = true, nullable = false, columnDefinition = "INT(11)", unique = true)
+	@Column (updatable = false, nullable = false, columnDefinition = "INT(11)", unique = true)
 	private int id;
 	
 	@Column (nullable = false, length = 50, unique = true)
 	private String email;
 	
-	@Column (nullable = false, length = 30, unique = true)
+	@Column (nullable = false, length = 30)
 	private String name;
 	
-	@Column (nullable = false, length = 200)
+	@Column (nullable = false, length = 30)
 	private String password;
 	
-	@Column (nullable = true)
-	private Integer challengeId;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles = new ArrayList<>();
-	
-	@Column (nullable = true)
+	@Column
 	private String goal;
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+	/*
+	@OneToMany(mappedBy = "member", targetEntity= Challenge.class)
+	private List<Challenge> challenge; // 한명의 멤버가 여러개의 챌린지 저장 : 리스트 사용
+	
+	public	Member(int id, String email, String name, String password, String goal)	// 생성자?
+	{
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.password = password;
+		this.goal = goal;
 	}
-
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return name;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	public UserDetails orElseThrow(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
+	*/
 }
+	//@OneToMany(mappedBy = "member")
+	//private List<Challenge> challenge = new ArrayList<Challenge>();
+	
+	

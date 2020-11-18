@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.capstone.controller.ContentsNotFoundException;
 import com.capstone.model.Equipment;
+import com.capstone.model.Meal;
 import com.capstone.repository.EquipmentRepository;
 
 @Component
@@ -36,6 +37,10 @@ public class EquipmentDao {
 		Equipment target = equipmentRepo.getOne(id);
 		target.update(equipment);
 		equipmentRepo.save(target);
+	}
+	
+	public List<Equipment> findAllEquipmentByGoal(String goal) {
+		return equipmentRepo.findAllByGoal(goal);
 	}
 
 }

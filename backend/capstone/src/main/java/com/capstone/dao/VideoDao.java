@@ -44,5 +44,9 @@ public class VideoDao {
 		target.setUrl(video.getUrl());
 		videoRepo.save(target);
 	}
+	
+	public List<Video> findAllVideoByGoal(String goal) {
+		return videoRepo.findAllByGoal(goal);
+	}
 
 }

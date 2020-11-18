@@ -20,7 +20,7 @@ public class Meal {
 	
 	private String name;
 
-	private String serving_size;
+	private String serving;
 	
 	private String calory;
 	
@@ -30,5 +30,5 @@ public class Meal {
 	
 	private String fat;
 	
-	private String training_purpose;
+	private String goal;
 }

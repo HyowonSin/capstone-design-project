@@ -36,7 +36,7 @@ public class AdminContentsController {
 	private VideoDao videoDao;
 	
 	@GetMapping("/admin/video")
-	public List<Video> listHomeTraining(){
+	public List<Video> lisVideo(){
 		return videoDao.findAllVideo();
 	}
 	
@@ -51,7 +51,7 @@ public class AdminContentsController {
 	}
 
 	@PostMapping("/admin/video/add")
-	public ResponseEntity<Video> addHomeTrainingData(@RequestBody Video video) {
+	public ResponseEntity<Video> addVideoData(@RequestBody Video video) {
 		videoDao.saveVideo(video);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(video.getTitle()).toUri();
@@ -75,7 +75,7 @@ public class AdminContentsController {
 	}
 	
 	@DeleteMapping("admin/video/delete/{id}")
-	public void deleteHomeTrainingData(@PathVariable int id) {
+	public void deleteVideoData(@PathVariable int id) {
 		videoDao.deleteVideo(id);
 	}
 	
@@ -90,7 +90,7 @@ public class AdminContentsController {
 	}
 	
 	@PutMapping("admin/video/modify/{id}")
-	public void modifyHomeTrainingData(@PathVariable int id, @RequestBody Video video) {
+	public void modifyVideoData(@PathVariable int id, @RequestBody Video video) {
 		videoDao.replaceVideo(id,video);
 	}
 	
@@ -102,6 +102,21 @@ public class AdminContentsController {
 	@PutMapping("admin/equipment/modify/{id}")
 	public void modifyEquipmentData(@PathVariable int id, @RequestBody Equipment equipment) {
 		equipmentDao.replaceEquipment(id,equipment);
+	}
+	
+	@GetMapping("admin/video/{goal}")
+	public List<Video> goalVideoData(@PathVariable String goal) {
+		return videoDao.findAllVideoByGoal(goal);
+	}
+	
+	@GetMapping("admin/meal/{goal}")
+	public List<Meal> goalMealData(@PathVariable String goal) {
+		return mealDao.findAllMealByGoal(goal);
+	}
+	
+	@GetMapping("admin/equipment/{goal}")
+	public List<Equipment> goalEquipmentData(@PathVariable String goal) {
+		return equipmentDao.findAllEquipmentByGoal(goal);
 	}
 	
 }
