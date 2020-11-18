@@ -51,15 +51,14 @@ public class UserDao {
 	public void saveUser(Member user) {
 		userRepo.save(user);
 	}
-	/*
-	public Member findBodyByGoal (String goal) {
-		if(userRepo.findMemberByGoal(goal) == "Body") {
-			
-			VideoDao.findByBody();
-			MealDao.findByBody();
-			EquipmentDao.findByBody();
-		}
+	
+	public String findGoalById (int id) {
+		Optional<Member> user = userRepo.findById(id);
+		System.out.println(user.toString());
+		//System.out.println(user.get().getGoal());
+		return user.get().getGoal();
 	}
+	/*
 	
 	public Member findDietByGoal (String goal) {
 		if(userRepo.findByTraining_purpose(goal) == "Diet") {

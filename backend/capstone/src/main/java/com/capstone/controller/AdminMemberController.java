@@ -11,8 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capstone.dao.UserDao;
+import com.capstone.dao.VideoDao;
+import com.capstone.model.Challenge;
 import com.capstone.model.Member;
+import com.capstone.model.Record;
+import com.capstone.model.Video;
+import com.capstone.repository.ChallengeRepository;
 import com.capstone.repository.MemberRepository;
+import com.capstone.repository.VideoRepository;
+
 
 @RestController
 @RequestMapping("/admin")
@@ -20,6 +28,11 @@ public class AdminMemberController {
 	
 	@Autowired
 	private MemberRepository memberRepo;
+	private ChallengeRepository challengeRepo;
+	private VideoRepository videoRepo;
+	private UserDao userDao;
+	private VideoDao videoDao;
+
 	
 	// http://localhost:8079/admin/member
 	// 전체멤버 조회
@@ -35,7 +48,7 @@ public class AdminMemberController {
 		Optional<Member> member = memberRepo.findById(id);			// 반환값이 옵셔널인 이유는 id가 있을 수도 있고 없을 수도 있어서
 	
 		if (!member.isPresent()) {
-			throw new ContentsNotFoundException(String.format("ID{%s} not found"));
+			throw new ContentsNotFoundException(String.format("ID{%s} not found", id));
 		}
 		
 		EntityModel<Member> model = new EntityModel<>(member.get());
@@ -44,4 +57,70 @@ public class AdminMemberController {
 		
 		return model;
 	}
+	
+	@GetMapping("/member/{id}/video")
+	public List<Video> retrieveAllVideoByMember(@PathVariable int id) {
+		//System.out.println(id);
+		//System.out.println(userDao.findGoalById(id));
+		if(userDao.findGoalById(id) == "diet") {
+			return videoDao.findAllVideoByGoal("Diet");
+		}
+		return null;
+	}
+	
+	/*
+	// /admin/member/{id}/challenge
+	
+	@GetMapping("/member/{id}/challenge")
+	public List<Challenge> retrieveAllChallengeByMember(@PathVariable int id) {
+		Optional<Member> member = memberRepo.findById(id);
+		
+		if (!member.isPresent()) {
+			throw new ContentsNotFoundException(String.format("ID{%s} not found", id));
+		}
+		
+		return member.get().getChallenge();
+	}
+	
+	
+	// 챌린지의 한줄평 조회
+	// /admin/memer/{id}/challenge/{id}
+	
+	@GetMapping("/challenge/{id}/record")
+	public List<Record> retrieveAllRecordByChallege(@PathVariable int id) {
+		Optional<Challenge> challenge = challengeRepo.findById(id);
+		
+		if (!challenge.isPresent()) {
+			throw new ContentsNotFoundException(String.format("ID{%s} not found", id));
+		}
+		
+		return challenge.get().getRecord();
+	}
+	
+	
+	// 개별챌린지 조회
+		// HATEOAS 적용 -> 결과에 한줄평(retrieveAllRecordByChallenge) 함께 링크
+		@GetMapping("/challenge/{id}")
+		public EntityModel<Challenge> retrieveChallenge(@PathVariable Integer id) {
+			Optional<Challenge> challenge = challengeRepo.findById(id);			// 반환값이 옵셔널인 이유는 id가 있을 수도 있고 없을 수도 있어서
+		
+			if (!challenge.isPresent()) {
+				throw new ContentsNotFoundException(String.format("ID{%s} not found", id));
+			}
+			
+			EntityModel<Challenge> model = new EntityModel<>(challenge.get());
+			WebMvcLinkBuilder linkTo = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).retrieveAllRecordByChallege());
+			model.add(linkTo.withRel("Daily-Record"));
+			
+			return model;
+		}
+		
+		// http://localhost:8079/admin/challenge
+		// 전체챌린지 조회
+		@GetMapping("/challenge")
+		public List<Challenge> retrieveAllChallenge() {
+			return challengeRepo.findAll();	
+		}
+		*/
+
 }
